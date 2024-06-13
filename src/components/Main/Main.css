@@ -1,0 +1,13 @@
+.main-container {
+  display: flex;
+  justify-content: baseline;
+  align-items: baseline;
+  flex-direction: row;
+  gap: 2rem;
+}
+.left-content {
+  margin: 0;
+  width: 20rem;
+  height: 100vh;
+  border-right: 2px solid black;
+}
