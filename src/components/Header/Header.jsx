@@ -1,6 +1,18 @@
 import "./Header.css";
+import { useState } from "react";
 
 const Header = () => {
+  const [user, setUser] = useState("github");
+
+  const handleUserInput = (e) => {
+    setUser(e.target.value);
+  };
+
+  const handleUserSearch = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`https://api.github.com/users/${user}`);
+    console.log(response);
+  };
   return (
     <div className="header-container">
       <h1 className="header-txt">github finder</h1>
@@ -14,10 +26,13 @@ const Header = () => {
         <input
           type="text"
           name="search-input"
-          placeholder="enter a username"
           className="search-input"
+          placeholder="enter to search a user"
+          onChange={handleUserInput}
         />
-        <button className="submit-btn">search</button>
+        <button className="submit-btn" onClick={handleUserSearch}>
+          search
+        </button>
       </div>
     </div>
   );
