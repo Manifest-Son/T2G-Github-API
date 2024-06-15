@@ -1,18 +1,20 @@
 import "./Header.css";
 import { useState } from "react";
+import useUserProfile from "../../store/gitprofile";
 
 const Header = () => {
-  const [user, setUser] = useState("github");
+  const useuserName = useUserProfile((state) => state.useuserName);
 
+  const [user, setUser] = useState("github");
   const handleUserInput = (e) => {
+    e.preventDefault();
     setUser(e.target.value);
   };
-
-  const handleUserSearch = async (e) => {
+  const handleUserSearch = (e) => {
     e.preventDefault();
-    const response = await fetch(`https://api.github.com/users/${user}`);
-    console.log(response);
+    useuserName(user);
   };
+
   return (
     <div className="header-container">
       <h1 className="header-txt">github finder</h1>

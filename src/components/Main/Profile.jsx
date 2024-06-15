@@ -4,6 +4,7 @@ import { FaBuilding } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import { FaBook } from "react-icons/fa6";
 import { FaExternalLinkAlt } from "react-icons/fa";
+// import useUserProfile from "../../store/gitprofile";
 import "./Main.css";
 
 const Profile = () => {
