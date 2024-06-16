@@ -1,9 +1,9 @@
 import "./Header.css";
 import { useState } from "react";
-import useUserProfile from "../../store/gitprofile";
+import useStore from "../../store/gitprofile";
 
 const Header = () => {
-  const useuserName = useUserProfile((state) => state.useuserName);
+  const newUser = useStore((state) => state.useStore);
 
   const [user, setUser] = useState("github");
   const handleUserInput = (e) => {
@@ -12,7 +12,7 @@ const Header = () => {
   };
   const handleUserSearch = (e) => {
     e.preventDefault();
-    useuserName(user);
+    newUser(user);
   };
 
   return (

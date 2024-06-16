@@ -40,7 +40,6 @@
   gap: 1.5rem;
 }
 .repos {
-  border: 2px solid green;
   background-color: #f1f1e6;
   width: 25rem;
   height: 20vh;
@@ -68,26 +67,22 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px solid green;
 }
 .following-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px solid red;
 }
 .follower-img {
-  --size: 5rem;
+  --size: 4rem;
   width: var(--size);
   height: var(--size);
-  border-radius: 50%;
 }
 .following-img {
-  --size: 5rem;
+  --size: 4rem;
   width: var(--size);
   height: var(--size);
-  border-radius: 50%;
 }
 .github-user {
   font-style: none;
