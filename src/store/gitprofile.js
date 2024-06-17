@@ -2,9 +2,10 @@ import { create } from "zustand";
 
 const Store = (set) => ({
   username: "",
-  users: {},
+  users: [],
   loading: false,
   error: false,
+  page: [],
 
   newUser: (username) => set({ username }),
 
@@ -19,14 +20,18 @@ const Store = (set) => ({
         console.error("An error occured");
       }
     } catch {
-      console.log("An error has occured. Try refreshing your browser");
+      set({ error: "An error has occured. Try refreshing your browser" });
+    } finally {
+      set({ loading: false });
     }
   },
 
   useRepo: async (username) => {
     set({ loading: true });
     try {
-      const response = await fetch(`https://api.github.com/users/${username}`);
+      const response = await fetch(
+        `https://api.github.com/user/${username}/repos`,
+      );
       if (response.ok == true) {
         const data = await response.json();
         set({ users: data });
@@ -41,7 +46,9 @@ const Store = (set) => ({
   useFollowers: async (username) => {
     set({ loading: true });
     try {
-      const response = await fetch(`https://api.github.com/users/${username}`);
+      const response = await fetch(
+        `https://api.github.com/users/${username}/followers`,
+      );
       if (response.ok == true) {
         const data = await response.json();
         set({ users: data });
@@ -56,7 +63,9 @@ const Store = (set) => ({
   useFollowing: async (username) => {
     set({ loading: true });
     try {
-      const response = await fetch(`https://api.github.com/users/${username}`);
+      const response = await fetch(
+        `https://api.github.com/users/${username}/following{/other_user}`,
+      );
       if (response.ok == true) {
         const data = await response.json();
         set({ users: data });
@@ -69,5 +78,6 @@ const Store = (set) => ({
   },
 });
 
+console.log();
 const useStore = create(Store);
 export default useStore;

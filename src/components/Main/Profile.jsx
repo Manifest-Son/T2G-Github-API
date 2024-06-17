@@ -9,6 +9,11 @@ import "./Main.css";
 
 const Profile = () => {
   const profile = useStore((state) => state.useProfile);
+
+  // if ( loading == true ){
+  //   <div>Loading.....</div>
+  // }
+
   return (
     <div className="profile-container">
       <img
