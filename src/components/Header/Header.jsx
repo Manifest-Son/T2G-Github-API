@@ -1,23 +1,40 @@
 import "./Header.css";
+import { useState } from "react";
+import useStore from "../../store/store";
 
 const Header = () => {
+  const [userInput, setUserInput] = useState("");
+  const setUser = useStore((state) => state.setUser);
+
+  const handleUserInput = (e) => {
+    e.preventDefault();
+    setUserInput(e.target.value);
+  };
+
+  const handleUserSubmit = () => {
+    setUser(userInput);
+  };
+
   return (
     <div className="header-container">
       <h1 className="header-txt">github finder</h1>
       <h3>
         By:{" "}
-        <a href="search" className="header-link">
+        <a href=" " className="header-link">
           Lennox Githinji
         </a>
       </h3>
       <div className="search-wrap">
         <input
           type="text"
-          name="search-input"
+          value={userInput}
           placeholder="enter a username"
           className="search-input"
+          onChange={handleUserInput}
         />
-        <button className="submit-btn">search</button>
+        <button type="submit" onClick={handleUserSubmit} className="submit-btn">
+          search
+        </button>
       </div>
     </div>
   );
