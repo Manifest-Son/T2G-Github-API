@@ -19,6 +19,14 @@
   flex-direction: column;
   gap: 3rem;
 }
+.loading-message {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.error-message {
+  font-size: 2rem;
+  font-weight: 700;
+}
 .profile-img {
   --size: 17rem;
   width: var(--size);
