@@ -53,7 +53,7 @@ const Store = (set) => ({
   forks: "",
   stars: "",
   repoList: [],
-  fetchRepo: async (username) => {
+  useUserRepo: async (username) => {
     set({ loading: true, error: null });
     try {
       const response = await fetch(
@@ -75,6 +75,36 @@ const Store = (set) => ({
     } catch (error) {
       set({ loading: false, error: error.message });
       console.error("Error fetching repositories", error);
+    }
+  },
+
+  following_id: "",
+  following_avatar: "",
+  following_name: "",
+  following_url: "",
+  followingList: [],
+
+  useUserFollowing: async (username) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await fetch(
+        `https://api.github.com/users/${username}/following`,
+      );
+      const data = await response.json();
+      if (response.ok) {
+        const following = data.map((current) => ({
+          following_id: current.id,
+          following_avatar: current.avatar_url,
+          following_name: current.login,
+          following_url: current.html_url,
+        }));
+        set({ followingList: following, loading: false });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      set({ loading: false, error: error.message });
+      console.error("Error fetching followers", error);
     }
   },
 });
