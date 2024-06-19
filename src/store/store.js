@@ -107,6 +107,36 @@ const Store = (set) => ({
       console.error("Error fetching followers", error);
     }
   },
+
+  followersList: [],
+  follower_id: "",
+  follower_avatar: "",
+  follower_name: "",
+  follower_url: "",
+
+  useUserFollowers: async (username) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await fetch(
+        `https://api.github.com/users/${username}/followers`,
+      );
+      const data = await response.json();
+      if (response.ok) {
+        const followers = data.map((current) => ({
+          follower_id: current.id,
+          follower_avatar: current.avatar_url,
+          follower_name: current.login,
+          follower_url: current.html_url,
+        }));
+        set({ followersList: followers, loading: false });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      set({ loading: false, error: error.message });
+      console.error("Error fetching followers", error);
+    }
+  },
 });
 
 const useStore = create(Store);
